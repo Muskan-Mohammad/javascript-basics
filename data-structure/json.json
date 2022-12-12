@@ -1,0 +1,25 @@
+{
+
+"name":"Muskan" ,
+"age":21 ,
+"Designation" : "Junior-Developer",
+"degree" : "Evnvironmental Science",
+"skills": [
+"HTML",
+"CSS",
+"Javascript"
+],
+"education" : {
+"degree" : "JSS AHER",
+"intermediate" : "Sri Chaitanya College",
+"school": "Call Public School"
+
+
+}
+
+
+
+
+
+
+}
