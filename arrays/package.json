@@ -1,7 +1,8 @@
 {
-  "name": "food-menu-project",
+  "name": "arrays",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "array-adding-method.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +12,5 @@
     "chalk": "^5.2.0",
     "readline-sync": "^1.4.10"
   },
-  "type": "module",
-  "description": ""
+  "type": "module"
 }
