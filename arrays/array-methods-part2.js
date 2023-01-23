@@ -79,3 +79,7 @@ console.log(numbers.lastIndexOf(2)); //3
 // console.log(total.shift());  // removes first item from the array
 // console.log(total.pop());    // removes last item from the array
 console.log(total.splice(1,3)) //  remain the item only of ths particular numbered array whereas rest r deleted
+
+//  Notee   slice doect change the original set of array !! It just disply the slice item in an array
+//       whereas  Splice change the original set of array !! and display hte spliced array item and delete the remaining items from the array
+                  // so whn u console log it u only get splice items not the rest items .
