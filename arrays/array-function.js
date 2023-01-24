@@ -2,10 +2,10 @@
 // [].splice(INDEX, END_INDEX);
 
 
-// [].forEach;
-// [].map;
-// [].filter;
-// [].reduce;
+// [].forEach;        undefined
+// [].map;            SAME LENGTH OF ARRAY
+// [].filter;         LESS OR EQUAL LENGTH OF ARRAY
+// [].reduce;         SINGLE VALUE
 // [].some;
 // [].find;
 
@@ -73,8 +73,17 @@ console.log(a_letter_name);
 // [ 'Abhi ', 'Arafath' ]
 
 
+//   Comparing operators in array 
+var first_array = [5, 45];
+var second_array = [5, 45];
+console.log(first_array === second_array); // false
 
+//                 10       ===       10
 
+console.log( first_array[0] === second_array[0]) // true
+var marks = [10, 20, 30, 40];
+var marks_copy = marks;
+console.log(marks === marks_copy); //true
 
 
 
