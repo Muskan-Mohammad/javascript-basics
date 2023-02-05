@@ -30,7 +30,7 @@ function createServer (request , response){
       // JSON.parse     => string -> object/array
       // JSON.stringify => object/array -> string  
 
-      const product  = productsList.find( product=> product.Id === productsId);
+      const product  = productsList.find( product=> product.Id === +productsId);
           
       if (product){
         response.end(JSON.stringify(product));
