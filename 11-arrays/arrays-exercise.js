@@ -85,3 +85,22 @@ let arr = [
 
 arr[1][3] = 606;
 console.log(arr);
+
+
+// var friends = ['muSkan', 'ZOYa', 'MehaK'];
+// // ['Muskan', 'Zoya', 'Mehak'];
+
+// var friendsName = friends.map( friend => friend.toLowerCase() );
+
+
+// var capitalize = friendsName.map(friend => {
+//   const firstLetter = friend[0].toUpperCase();
+//   const remainingLetters = friend.substring(1);
+//   return firstLetter + remainingLetters
+// });
+
+// console.log(friends);
+// console.log(friendsName);
+// console.log(capitalize);
+
+// // ['muskan', 'zoya', 'mehak'];
