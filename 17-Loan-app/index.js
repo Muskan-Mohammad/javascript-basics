@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const db  = require("./db.js");
 
 // Creating an express application
 const app = express();
@@ -7,12 +8,22 @@ const app = express();
 // Handling json body request
 app.use(bodyParser.json());
 
-app.get('/' , function(req , res){
-    res.json({
-        status: true,
-        message: "Loan API is running successfully!!!"
-
-    });
+app.get('/loan' , function(req , res){
+   db.serialize(() => {
+    db.all(`SELECT * from loans` , (error , rows) => {
+        if(error){
+            res.json({
+                status: false,
+                error: error
+            })
+        } else {
+            res.json({
+                status : true,
+                loans : rows
+            })
+        }
+    })
+   })
 });
 
 
