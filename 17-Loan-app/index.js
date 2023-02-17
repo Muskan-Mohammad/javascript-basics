@@ -29,15 +29,11 @@ app.get('/loan' , function(req , res){
 
 app.post('/new-loan' , function ( req , res){
     const loanData = req.body;
-    const { firstName , lastName , amount , purpose  ,email} = loanData;
+    const { fullName , amount , purpose  ,email} = loanData;
 
 
-    if(!firstName){
-        return sendErrorResponse( res , 'Please enter your firstName');
-    }
-
-    if(!lastName){
-        return sendErrorResponse( res , 'Please enter your lastName');
+    if(!fullName){
+        return sendErrorResponse( res , 'Please enter your fullName');
     }
 
     if(!amount){
@@ -52,12 +48,76 @@ app.post('/new-loan' , function ( req , res){
         return sendErrorResponse ( res , 'Please enter a valid email');
     }
 
-    res.json({
-        status : true,
-        message : "New Loan application created...",
-        data : loanData
-    });
+    const insertSQL = `INSERT INTO loans ( 
+        fullName,
+        amount,
+        email,
+        purpose)    VALUES (
+           " ${fullName}",
+           " ${amount}",
+           " ${email}",
+           " ${purpose}"
+
+        )`;
+
+        db.serialize(() => {
+            db.exec(insertSQL , (error) => {
+                if(error){
+                    res.status(400).json({
+                        status : false,
+                        error: error
+                    })
+                } else {
+                   res.json({
+                    status: true,
+                    message:"New application for loan was created",
+                    // data : loanData,
+                    // sql: insertSQL
+                   }) 
+                }
+            })
+        });
 });
+
+app.get('/loan/:id' , function(req , res){
+       const loan_id = req.params.id;
+       const sql = `SELECT * from loans WHERE loan_id=${loan_id};`;
+       db.serialize(() => {
+        db.get(sql , (err , rows) => {
+            if(err || !rows) {
+                res.status(400).json({status: false , error: `Unable to find loan with id: ${loan_id}`})
+            
+            } else {
+                res.json({status: true , loans : rows })
+            }
+        })
+       })
+       
+})
+
+app.post('/loan/:id' , function (req , res){
+    const loan_id = req.params.id;
+    const requestBody = req.body;
+    const status = requestBody.status;
+
+    const sql = `
+    UPDATE loans
+    SET status="${status}}"
+    WHERE loan_id=${loan_id}
+    `;
+    db.serialize(() => {
+        db.exec(sql , (err) => {
+            if(err) {
+                res.status(400).json({status: false , error: `Unable to find loan with id: ${loan_id}`})
+            
+            } else {
+                res.json({status: true , message : "Loans Updation is available" 
+            })
+            }
+        })
+       })  
+})
+
 
 function sendErrorResponse( res , errorMessage){
     return res.status(400).json({
