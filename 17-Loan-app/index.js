@@ -17,6 +17,16 @@ app.get('/loan' , function(req , res){
                 error: error
             })
         } else {
+
+            for (let i=0 ; i< rows.length; i++){
+                delete rows[i].email;
+            }
+
+            // let index=0;
+            // while(index < rows.length) {
+            //   delete rows[index].purpose;
+            //   index++;
+            // }
             res.json({
                 status : true,
                 loans : rows
@@ -93,7 +103,7 @@ app.get('/loan/:id' , function(req , res){
         })
        })
        
-})
+});
 
 app.post('/loan/:id' , function (req , res){
     const loan_id = req.params.id;
@@ -116,6 +126,23 @@ app.post('/loan/:id' , function (req , res){
             }
         })
        })  
+});
+
+
+app.delete('/loan/:id' , function(req , res){
+    const loan_id = req.params.id;
+    const sql =  `DELETE from loans WHERE loan_id=${loan_id}`;
+    db.serialize(() => {
+     db.get(sql , (err) => {
+         if(err ) {
+            return sendErrorResponse(res, "Can't delete the loan")
+         
+         } else {
+             res.json({status: true , message : "The following loan history was deleted" })
+         }
+     })
+    })
+    
 })
 
 
